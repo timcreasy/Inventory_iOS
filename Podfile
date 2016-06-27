@@ -9,4 +9,5 @@ target 'Inventory' do
   pod 'RSBarcodes_Swift', '~> 0.1.9'
   pod 'Firebase'
   pod 'Firebase/Database'
+  pod 'SwiftyJSON'
 end

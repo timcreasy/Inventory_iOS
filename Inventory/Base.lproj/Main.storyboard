@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -70,15 +71,45 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O79-xH-DO5">
+                                <rect key="frame" x="87" y="173" width="427" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6NY-cX-A41">
+                                <rect key="frame" x="252" y="223" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDG-it-CTc">
+                                <rect key="frame" x="244" y="285" width="113" height="30"/>
+                                <state key="normal" title="Add to Inventory"/>
+                                <connections>
+                                    <action selector="inventoryButton:" destination="vOy-dV-kcM" eventType="touchUpInside" id="md3-Qv-Jtq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="O79-xH-DO5" secondAttribute="trailing" constant="66" id="2uV-yK-aCU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6NY-cX-A41" secondAttribute="trailing" constant="231" id="B2q-Wd-FHg"/>
                             <constraint firstItem="6Qr-nD-hl8" firstAttribute="top" secondItem="8Su-yk-7FH" secondAttribute="bottom" constant="50" id="Eet-5L-bpk"/>
+                            <constraint firstItem="O79-xH-DO5" firstAttribute="leading" secondItem="MCJ-vt-6UL" secondAttribute="leadingMargin" constant="67" id="O7q-vF-3XC"/>
+                            <constraint firstItem="iDG-it-CTc" firstAttribute="top" secondItem="6NY-cX-A41" secondAttribute="bottom" constant="32" id="OFR-EF-TYV"/>
+                            <constraint firstItem="O79-xH-DO5" firstAttribute="top" secondItem="6Qr-nD-hl8" secondAttribute="bottom" constant="27" id="OxQ-5p-2wc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iDG-it-CTc" secondAttribute="trailing" constant="223" id="TPm-Ji-6ZX"/>
+                            <constraint firstItem="iDG-it-CTc" firstAttribute="leading" secondItem="MCJ-vt-6UL" secondAttribute="leadingMargin" constant="224" id="arK-vE-SBc"/>
                             <constraint firstItem="6Qr-nD-hl8" firstAttribute="centerX" secondItem="MCJ-vt-6UL" secondAttribute="centerX" id="iIV-uo-26f"/>
+                            <constraint firstItem="6NY-cX-A41" firstAttribute="top" secondItem="O79-xH-DO5" secondAttribute="bottom" constant="29" id="rgo-7d-8Ct"/>
+                            <constraint firstItem="6NY-cX-A41" firstAttribute="leading" secondItem="MCJ-vt-6UL" secondAttribute="leadingMargin" constant="232" id="y5y-qr-KhS"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addUpdateButton" destination="iDG-it-CTc" id="BJI-y4-q3i"/>
                         <outlet property="barcodeLabel" destination="6Qr-nD-hl8" id="003-Kz-OFz"/>
+                        <outlet property="promptLabel" destination="O79-xH-DO5" id="A3I-SR-MrK"/>
+                        <outlet property="quantityTextField" destination="6NY-cX-A41" id="bUg-vG-7Wt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="erv-nE-IKI" userLabel="First Responder" sceneMemberID="firstResponder"/>
