@@ -33,6 +33,7 @@ class BarcodeFoundViewController: UIViewController {
             let newQuantity = self.quantityTextField.text;
             let newQuantityUpdate = ["quantity": newQuantity!]
             productRef.updateChildValues(newQuantityUpdate);
+            self.quantityTextField.text = "";
         } else {
             let inventoryRef = FIRDatabase.database().reference();
             let key = inventoryRef.child("inventory").childByAutoId().key
@@ -41,7 +42,10 @@ class BarcodeFoundViewController: UIViewController {
                               "quantity": setQuantity!];
             let childUpdates = ["/inventory/\(key)": newBarcode]
             inventoryRef.updateChildValues(childUpdates)
+            self.quantityTextField.text = "";
         }
+        
+        self.loadData();
         
     
     }
@@ -50,32 +54,37 @@ class BarcodeFoundViewController: UIViewController {
         
         super.viewDidLoad()
         
+        self.loadData();
+        
+    }
+    
+    func loadData() {
+        
         
         barcodeLabel.text = contents;
         
         // Create a reference to a Firebase location
         let rootRef = FIRDatabase.database().reference()
-
+        
         
         // Search through all values in firebase
         rootRef.observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
             let inventory = JSON(snapshot.value!)
             for (key, subJson) in inventory["inventory"] {
                 if let barcode = subJson["barcode"].string {
-                    print("barcode", barcode);
-                    print("self.contents", self.contents);
+                    let quantity = subJson["quantity"].string;
                     // Barcode exists
                     if (barcode == self.contents) {
-
+                        
                         let barcodeUpdateString = "Product " + self.contents + " exists!";
                         self.barcodeLabel.text = barcodeUpdateString;
-                        self.promptLabel.text = "Update quantity below";
+                        self.promptLabel.text = "Current quantity: " + quantity!;
                         self.quantityTextField.placeholder = "Update quantity";
                         self.addUpdateButton.setTitle("Update", forState: .Normal)
                         self.barcodeExists = true;
                         self.productKey = key;
                     }
-
+                    
                 }
             }
             
@@ -87,11 +96,9 @@ class BarcodeFoundViewController: UIViewController {
                 self.quantityTextField.placeholder = "Set quantity";
                 self.addUpdateButton.setTitle("Set", forState: .Normal)
             }
-
+            
         })
 
-
-        
         
     }
     
