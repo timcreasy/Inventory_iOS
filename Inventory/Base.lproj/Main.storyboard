@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -61,24 +62,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Qr-nD-hl8">
-                                <rect key="frame" x="87" y="114" width="427" height="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMS-jd-gSZ">
+                                <rect key="frame" x="70" y="110" width="459" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="JBH-m3-MKA"/>
+                                    <constraint firstAttribute="width" secondItem="UMS-jd-gSZ" secondAttribute="height" multiplier="153:7" id="njX-UT-Hkp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mfn-Ar-djz">
+                                <rect key="frame" x="70" y="160" width="459" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Mfn-Ar-djz" secondAttribute="height" multiplier="153:7" id="Yzs-3x-e2m"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Set quantity" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LMq-sX-sOI">
+                                <rect key="frame" x="186" y="223" width="226" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="LMq-sX-sOI" secondAttribute="height" multiplier="113:15" id="exJ-Dj-QfA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKp-Ff-oBH">
+                                <rect key="frame" x="216" y="285" width="167" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="JKp-Ff-oBH" secondAttribute="height" multiplier="167:30" id="bAH-gS-Sa6"/>
+                                </constraints>
+                                <state key="normal" title="Set"/>
+                                <connections>
+                                    <action selector="addUpdateButtonPressed:" destination="vOy-dV-kcM" eventType="touchUpInside" id="TGs-pz-Fct"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6Qr-nD-hl8" firstAttribute="top" secondItem="8Su-yk-7FH" secondAttribute="bottom" constant="50" id="Eet-5L-bpk"/>
-                            <constraint firstItem="6Qr-nD-hl8" firstAttribute="centerX" secondItem="MCJ-vt-6UL" secondAttribute="centerX" id="iIV-uo-26f"/>
+                            <constraint firstItem="LMq-sX-sOI" firstAttribute="centerX" secondItem="MCJ-vt-6UL" secondAttribute="centerX" id="ATy-n0-JjG"/>
+                            <constraint firstItem="JKp-Ff-oBH" firstAttribute="centerX" secondItem="MCJ-vt-6UL" secondAttribute="centerX" id="ITA-nm-M0f"/>
+                            <constraint firstItem="JKp-Ff-oBH" firstAttribute="top" secondItem="LMq-sX-sOI" secondAttribute="bottom" constant="32" id="OL8-zL-bDX"/>
+                            <constraint firstItem="UMS-jd-gSZ" firstAttribute="centerX" secondItem="MCJ-vt-6UL" secondAttribute="centerX" id="TZt-rL-SNo"/>
+                            <constraint firstItem="Mfn-Ar-djz" firstAttribute="top" secondItem="UMS-jd-gSZ" secondAttribute="bottom" constant="29" id="Y2O-tf-XHx"/>
+                            <constraint firstItem="LMq-sX-sOI" firstAttribute="top" secondItem="Mfn-Ar-djz" secondAttribute="bottom" constant="42" id="j8U-3b-0xF"/>
+                            <constraint firstItem="UMS-jd-gSZ" firstAttribute="top" secondItem="8Su-yk-7FH" secondAttribute="bottom" constant="46" id="mqL-8t-d4O"/>
+                            <constraint firstItem="Mfn-Ar-djz" firstAttribute="centerX" secondItem="MCJ-vt-6UL" secondAttribute="centerX" id="vhf-c6-yYy"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="barcodeLabel" destination="6Qr-nD-hl8" id="003-Kz-OFz"/>
+                        <outlet property="addUpdateButton" destination="JKp-Ff-oBH" id="Yp6-AH-7Uq"/>
+                        <outlet property="barcodeLabel" destination="UMS-jd-gSZ" id="A1h-n8-Wfm"/>
+                        <outlet property="promptLabel" destination="Mfn-Ar-djz" id="zX8-s9-wXm"/>
+                        <outlet property="quantityTextField" destination="LMq-sX-sOI" id="zQn-Gr-oqe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="erv-nE-IKI" userLabel="First Responder" sceneMemberID="firstResponder"/>

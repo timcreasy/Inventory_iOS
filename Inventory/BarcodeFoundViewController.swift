@@ -10,11 +10,41 @@ import UIKit
 import RSBarcodes_Swift
 import Firebase
 import FirebaseDatabase
+import SwiftyJSON
 
 class BarcodeFoundViewController: UIViewController {
     
+    
+    
+    @IBOutlet var promptLabel: UILabel!
     @IBOutlet var barcodeLabel: UILabel!
+    @IBOutlet var addUpdateButton: UIButton!
+    @IBOutlet var quantityTextField: UITextField!
+    
+    
+    var productKey:String = "";
     var contents:String = ""
+    var barcodeExists:Bool = false;
+    
+    @IBAction func addUpdateButtonPressed(sender: AnyObject) {
+    
+        if (barcodeExists) {
+            let productRef = FIRDatabase.database().reference().child("inventory").child(productKey);
+            let newQuantity = self.quantityTextField.text;
+            let newQuantityUpdate = ["quantity": newQuantity!]
+            productRef.updateChildValues(newQuantityUpdate);
+        } else {
+            let inventoryRef = FIRDatabase.database().reference();
+            let key = inventoryRef.child("inventory").childByAutoId().key
+            let setQuantity = self.quantityTextField.text;
+            let newBarcode = ["barcode": self.contents,
+                              "quantity": setQuantity!];
+            let childUpdates = ["/inventory/\(key)": newBarcode]
+            inventoryRef.updateChildValues(childUpdates)
+        }
+        
+    
+    }
     
     override func viewDidLoad() {
         
@@ -25,13 +55,43 @@ class BarcodeFoundViewController: UIViewController {
         
         // Create a reference to a Firebase location
         let rootRef = FIRDatabase.database().reference()
-        // Write data to Firebase
-        // self.ref.child("users").child(user!.uid).setValue(["username": username])
-        //rootRef.updateChildValues(["barcode": contents])
-        let key = rootRef.child("inventory").childByAutoId().key
-        let newBarcode = ["barcode": contents]
-        let childUpdates = ["/inventory/\(key)": newBarcode]
-        rootRef.updateChildValues(childUpdates)
+
+        
+        // Search through all values in firebase
+        rootRef.observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
+            let inventory = JSON(snapshot.value!)
+            for (key, subJson) in inventory["inventory"] {
+                if let barcode = subJson["barcode"].string {
+                    print("barcode", barcode);
+                    print("self.contents", self.contents);
+                    // Barcode exists
+                    if (barcode == self.contents) {
+
+                        let barcodeUpdateString = "Product " + self.contents + " exists!";
+                        self.barcodeLabel.text = barcodeUpdateString;
+                        self.promptLabel.text = "Update quantity below";
+                        self.quantityTextField.placeholder = "Update quantity";
+                        self.addUpdateButton.setTitle("Update", forState: .Normal)
+                        self.barcodeExists = true;
+                        self.productKey = key;
+                    }
+
+                }
+            }
+            
+            // Barcode does not exist yet
+            if (self.barcodeExists == false) {
+                let newBarcodeString = "New product - " + self.contents;
+                self.barcodeLabel.text = newBarcodeString;
+                self.promptLabel.text = "Set quantity";
+                self.quantityTextField.placeholder = "Set quantity";
+                self.addUpdateButton.setTitle("Set", forState: .Normal)
+            }
+
+        })
+
+
+        
         
     }
     
